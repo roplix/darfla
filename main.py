@@ -21,9 +21,17 @@ responses = [
     "ty",
     "thanks",
     "thank you",
-    "lfg",
     "tysm",
     "thankss",
+    "thnks",
+    "tq",
+    "tnx",
+    "thank u",
+    "thx a lot",
+    "thx so much",
+    "many thanks",
+    "cheers",
+    "thnx"
 ]
 
 keep_alive()
