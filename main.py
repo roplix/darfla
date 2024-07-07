@@ -11,7 +11,8 @@ from settings import (
     is_enters_value_at_most_4,
     is_pool_per_enters_above_threshold,
     extract_text_between_parentheses,
-    is_pool_per_enters_worth_risk
+    is_pool_per_enters_worth_risk,
+    is_prize_value_above_threshold1
 )
 
 emoji_options = ['❤', '💙', '🚀', '🔥']
@@ -42,12 +43,6 @@ app = Flask(__name__)
 @app.route('/')
 def hello_world():
     return 'Hello, World!'
-
-# EXTRA
-
-
-
-#EXTRA
 
 # Discord client setup
 class MyClient(discord.Client):
@@ -91,21 +86,6 @@ async def on_message(message):
                     await asyncio.sleep(random.randint(2, 5))
                     await channel.send(f"<@740547277164249089> hmdlh rb7t {extracted_text}")
 
-            elif client.user.mentioned_in(message) and "Airdrop collected" in embed.description:
-                response = random.choice(responses)
-                extracted_text = extract_text_between_parentheses(embed.description)
-
-                if extracted_text:
-                    print(f"Extracted text: {extracted_text}")
-
-                channel_id = 1252731072081428500
-                channel = client.get_channel(channel_id)
-
-                if channel and extracted_text:
-                    async with channel.typing():
-                        await asyncio.sleep(random.randint(3, 7))
-                        await channel.send(f"dit {extracted_text} f airdrop")
-
         # Example of handling different conditions for entering raffles or airdrops
         for embed in message.embeds:
             if  embed and embed.description and "Raffle created" in embed.description:
@@ -113,9 +93,9 @@ async def on_message(message):
                     for component in message.components:
                         for child in component.children:
                             if child.label == "Enter":
-            #                   await asyncio.sleep(random.randint(2, 4))
+                 #               await asyncio.sleep(random.randint(2, 4))
                                 await child.click()
-                elif is_prize_value_above_threshold(embed.fields):
+                elif is_prize_value_above_threshold1(embed.fields):
                     for component in message.components:
                         for child in component.children:
                             if child.label == "Enter":
