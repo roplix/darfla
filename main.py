@@ -85,6 +85,22 @@ async def on_message(message):
                 if channel and extracted_text:
                     await asyncio.sleep(random.randint(2, 5))
                     await channel.send(f"<@740547277164249089> hmdlh rb7t {extracted_text}")
+    
+            elif client.user.mentioned_in(message) and "Airdrop collected" in embed.description:
+                response = random.choice(responses)
+                extracted_text = extract_text_between_parentheses(embed.description)
+
+                if extracted_text:
+                    print(f"Extracted text: {extracted_text}")
+
+                channel_id = 1252731072081428500
+                channel = client.get_channel(channel_id)
+
+                if channel and extracted_text:
+                    async with channel.typing():
+                        await asyncio.sleep(random.randint(3, 7))
+                        await channel.send(f"dit {extracted_text} f airdrop")
+
 
         # Example of handling different conditions for entering raffles or airdrops
         for embed in message.embeds:
@@ -115,21 +131,6 @@ async def on_message(message):
                         for child in component.children:
                             if child.label == "Enter":
                                 await asyncio.sleep(random.randint(3, 6))
-                                await child.click()
-                elif is_pool_value_above_threshold_1(embed.fields) and is_enters_value_at_most_4(embed.fields):
-                    for component in message.components:
-                        for child in component.children:
-                            if child.label == "Enter":
-                                await child.click()
-                                await asyncio.sleep(random.randint(5, 10))
-                                async with message.channel.typing():
-                                    await asyncio.sleep(random.randint(3, 6))
-                                    await message.channel.send(response)
-                elif is_pool_per_enters_above_threshold(embed.fields):
-                    for component in message.components:
-                        for child in component.children:
-                            if child.label == "Enter":
-                                await asyncio.sleep(random.randint(10, 30))
                                 await child.click()
                 else:
                     print("Conditions not met for any action, skipping")
