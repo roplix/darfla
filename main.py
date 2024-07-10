@@ -103,6 +103,36 @@ async def on_message(message):
                                 await child.click()
                 else:
                     print("Conditions not met for any action, skipping")
+            elif embed and embed.description and "Airdrop created" in embed.description:
+                if is_pool_per_enters_worth_risk(embed.fields):
+                    for component in message.components:
+                        for child in component.children:
+                            if child.label == "Enter":
+                #               await asyncio.sleep(random.randint(3, 6))
+                                await child.click()
+                elif is_pool_value_above_threshold(embed.fields):
+                    for component in message.components:
+                        for child in component.children:
+                            if child.label == "Enter":
+                                await asyncio.sleep(random.randint(3, 6))
+                                await child.click()
+                elif is_pool_value_above_threshold_1(embed.fields) and is_enters_value_at_most_4(embed.fields):
+                    for component in message.components:
+                        for child in component.children:
+                            if child.label == "Enter":
+                                await child.click()
+                                await asyncio.sleep(random.randint(5, 10))
+                                async with message.channel.typing():
+                                    await asyncio.sleep(random.randint(3, 6))
+                                    await message.channel.send(response)
+                elif is_pool_per_enters_above_threshold(embed.fields):
+                    for component in message.components:
+                        for child in component.children:
+                            if child.label == "Enter":
+                                await asyncio.sleep(random.randint(10, 30))
+                                await child.click()
+                else:
+                    print("Conditions not met for any action, skipping")
 
 # Run the client
 if __name__ == "__main__":
