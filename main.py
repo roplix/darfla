@@ -65,18 +65,18 @@ async def on_message(message):
 
                 if extracted_text:
                     print(f"Extracted text: {extracted_text}")
-
-                await asyncio.sleep(random.randint(2, 4))
-                async with message.channel.typing():
-                    await asyncio.sleep(random.randint(2, 4))
-                    await message.channel.send(response)
-
+                
                 try:
                     random_emoji = random.choice(emoji_options)
                     await asyncio.sleep(random.randint(5, 8))
                     await message.add_reaction(random_emoji)
                 except Exception as e:
                     print(f"Failed to add reaction: {e}")
+
+                await asyncio.sleep(random.randint(6, 8))
+                async with message.channel.typing():
+                    await asyncio.sleep(random.randint(2, 4))
+                    await message.channel.send(response)
 
                 # Example of sending to another channel
                 channel_id = 1252625826109722664
