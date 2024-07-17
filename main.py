@@ -51,6 +51,7 @@ class MyClient(discord.Client):
         # Setting up the mobile presence without any activity
         mobile_presence = {
             "status": "online",
+            "browser": "Discord iOS",
             "client_status": {
                 "mobile": "online"
             }
