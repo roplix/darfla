@@ -48,16 +48,6 @@ def hello_world():
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
-        # Setting up the mobile presence without any activity
-        mobile_presence = {
-            "status": "online",
-            "browser": "Discord iOS",
-            "client_status": {
-                "mobile": "online"
-            }
-        }
-        await self.http.request(discord.http.Route('PATCH', '/users/@me/settings'), json=mobile_presence)
-        print('Mobile presence set!')
 
 client = MyClient()
 
