@@ -48,6 +48,15 @@ def hello_world():
 class MyClient(discord.Client):
     async def on_ready(self):
         print('Logged on as', self.user)
+        # Setting up the mobile presence without any activity
+        mobile_presence = {
+            "status": "online",
+            "client_status": {
+                "mobile": "online"
+            }
+        }
+        await self.http.request(discord.http.Route('PATCH', '/users/@me/settings'), json=mobile_presence)
+        print('Mobile presence set!')
 
 client = MyClient()
 
@@ -101,7 +110,6 @@ async def on_message(message):
                         await asyncio.sleep(random.randint(3, 7))
                         await channel.send(f"dit {extracted_text} f airdrop")
 
-
         # Example of handling different conditions for entering raffles or airdrops
         for embed in message.embeds:
             if  embed and embed.description and "Raffle created" in embed.description:
@@ -109,7 +117,6 @@ async def on_message(message):
                     for component in message.components:
                         for child in component.children:
                             if child.label == "Enter":
-                 #               await asyncio.sleep(random.randint(2, 4))
                                 await child.click()
                 elif is_prize_value_above_threshold1(embed.fields):
                     for component in message.components:
@@ -124,7 +131,6 @@ async def on_message(message):
                     for component in message.components:
                         for child in component.children:
                             if child.label == "Enter":
-                #               await asyncio.sleep(random.randint(3, 6))
                                 await child.click()
                 elif is_pool_value_above_threshold(embed.fields):
                     for component in message.components:
