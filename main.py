@@ -76,7 +76,7 @@ async def on_message(message):
                 await asyncio.sleep(random.randint(6, 8))
                 async with message.channel.typing():
                     await asyncio.sleep(random.randint(2, 4))
-                    await message.channel.send(response)
+                    await message.reply(response)
 
                 # Example of sending to another channel
                 channel_id = 1252625826109722664
